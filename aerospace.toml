@@ -1,0 +1,339 @@
+# ~/.aerospace.toml
+# Amethyst → AeroSpace migration for Mads Thines
+# Modifiers: main = ctrl-alt, move = alt, resize = alt-cmd, service mode = ctrl-alt-shift
+
+config-version = 2
+
+after-startup-command = []
+start-at-login = true
+
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+accordion-padding = 16
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'horizontal'
+
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+automatically-unhide-macos-hidden-apps = false
+
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+[workspace-to-monitor-force-assignment]
+1 = 'main'
+2 = 'main'
+3 = 'main'
+4 = 'main'
+5 = 'main'
+6 = 'secondary'
+7 = 'secondary'
+8 = 'secondary'
+9 = 'secondary'
+
+[key-mapping]
+preset = 'qwerty'
+
+# --- Workspace overview (fork-only) ---
+# Mission Control–style grid; triggered by ctrl-alt-o.
+# Only loaded by AeroSpace-Debug fork; remove the [overview] block + ctrl-alt-o
+# binding to roll back to upstream AeroSpace.
+[overview]
+workspaces = ['1', '2', '3', '4', '5', '6']
+columns = 'auto'
+cell-label = 'both'
+dim-background = false
+dim-opacity = 70
+
+# Padding: 10px gaps (your default-padding = 10)
+[gaps]
+inner.horizontal = 10
+inner.vertical = 10
+outer.left = 10
+outer.bottom = 10
+outer.top = 10
+outer.right = 10
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# MAIN MODE BINDINGS
+# ═══════════════════════════════════════════════════════════════════════════════
+[mode.main.binding]
+
+# --- Layout toggle: tiles horizontal (tall) ↔ accordion horizontal (fullscreen/stacked) ---
+ctrl-alt-shift-space = [
+  'flatten-workspace-tree',
+  'layout tiles horizontal accordion horizontal floating',
+]
+
+# --- Toggle floating ---
+ctrl-t = 'layout floating tiling'
+shift-ctrl-alt-t = 'layout floating tiling'
+
+# --- Join windows into containers (ctrl-alt + direction) ---
+# Focus a window, then join it with the neighbor in that direction
+ctrl-alt-h = 'join-with left'
+ctrl-alt-j = 'join-with down'
+ctrl-alt-k = 'join-with up'
+ctrl-alt-l = 'join-with right'
+
+# --- Focus navigation (alt = move mod) ---
+# ⌥+h/j/k/l → vim-style focus
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+# --- Cycle window focus (ISO < key) ---
+cmd-sectionSign = 'focus dfs-next --boundaries workspace --boundaries-action wrap-around-the-workspace'
+cmd-shift-sectionSign = 'focus dfs-prev --boundaries workspace --boundaries-action wrap-around-the-workspace'
+
+# --- Resize ---
+# ⌃⌥+/´ (keys next to backspace on Danish keyboard)
+ctrl-alt-equal = 'resize smart +70'
+ctrl-alt-minus = 'resize smart -70'
+# ⌥Cmd+h/j/k/l → directional resize
+alt-cmd-h = 'resize smart -50'
+alt-cmd-j = 'resize smart -50'
+alt-cmd-k = 'resize smart +50'
+alt-cmd-l = 'resize smart +50'
+
+# --- Workspace focus (ctrl + number) ---
+ctrl-1 = 'workspace 1'
+ctrl-2 = 'workspace 2'
+ctrl-3 = 'workspace 3'
+ctrl-4 = 'workspace 4'
+ctrl-5 = 'workspace 5'
+ctrl-6 = 'workspace 6'
+ctrl-7 = 'workspace 7'
+ctrl-8 = 'workspace 8'
+ctrl-9 = 'workspace 9'
+
+# --- Move node to workspace + follow (ctrl-shift + number) ---
+ctrl-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
+ctrl-alt-1 = ['move-node-to-workspace 1', 'workspace 1']
+ctrl-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
+ctrl-alt-2 = ['move-node-to-workspace 2', 'workspace 2']
+ctrl-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
+ctrl-alt-3 = ['move-node-to-workspace 3', 'workspace 3']
+ctrl-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
+ctrl-alt-4 = ['move-node-to-workspace 4', 'workspace 4']
+ctrl-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
+ctrl-alt-5 = ['move-node-to-workspace 5', 'workspace 5']
+ctrl-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
+ctrl-alt-6 = ['move-node-to-workspace 6', 'workspace 6']
+ctrl-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
+ctrl-alt-7 = ['move-node-to-workspace 7', 'workspace 7']
+ctrl-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
+ctrl-alt-8 = ['move-node-to-workspace 8', 'workspace 8']
+ctrl-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
+ctrl-alt-9 = ['move-node-to-workspace 9', 'workspace 9']
+
+# --- Focus navigation (ctrl-alt + arrows) ---
+ctrl-left = 'focus left'
+ctrl-right = 'focus right'
+ctrl-up = 'exec-and-forget ~/.config/aerospace/scripts/smart-focus.sh dfs-prev up'
+ctrl-down = 'exec-and-forget ~/.config/aerospace/scripts/smart-focus.sh dfs-next down'
+
+# --- Move window (shift-ctrl + arrows) ---
+shift-ctrl-left = 'move left'
+shift-ctrl-right = 'move right'
+shift-ctrl-up = 'move up'
+shift-ctrl-down = 'move down'
+
+# --- Monitor focus (ctrl-alt-shift + arrows) ---
+ctrl-alt-shift-left = 'focus-monitor left'
+ctrl-alt-shift-right = 'focus-monitor right'
+ctrl-alt-shift-up = 'focus-monitor up'
+ctrl-alt-shift-down = 'focus-monitor down'
+
+# --- Workspace cycling ---
+ctrl-alt-leftSquareBracket = 'workspace next'  # ⌥Ctrl+[
+ctrl-alt-rightSquareBracket = 'workspace prev' # ⌥Ctrl+]
+ctrl-alt-left = 'workspace prev'
+ctrl-alt-right = 'workspace next'
+# --- Rotate all windows in layout (ctrl-alt-tab / ctrl-alt-shift-tab) ---
+ctrl-alt-a = 'exec-and-forget ~/.config/aerospace/scripts/rotate-windows.sh right'
+ctrl-alt-d = 'exec-and-forget ~/.config/aerospace/scripts/rotate-windows.sh left'
+# alt-tab is workspace overview (see below). Rotate-left primary lives on ctrl-alt-d.
+
+
+# --- Swap current workspace with target ---
+ctrl-alt-shift-1 = 'exec-and-forget ~/.config/aerospace/scripts/swap-workspace.sh 1'
+ctrl-alt-shift-2 = 'exec-and-forget ~/.config/aerospace/scripts/swap-workspace.sh 2'
+ctrl-alt-shift-3 = 'exec-and-forget ~/.config/aerospace/scripts/swap-workspace.sh 3'
+ctrl-alt-shift-4 = 'exec-and-forget ~/.config/aerospace/scripts/swap-workspace.sh 4'
+ctrl-alt-shift-5 = 'exec-and-forget ~/.config/aerospace/scripts/swap-workspace.sh 5'
+ctrl-alt-shift-6 = 'exec-and-forget ~/.config/aerospace/scripts/swap-workspace.sh 6'
+ctrl-alt-shift-7 = 'exec-and-forget ~/.config/aerospace/scripts/swap-workspace.sh 7'
+ctrl-alt-shift-8 = 'exec-and-forget ~/.config/aerospace/scripts/swap-workspace.sh 8'
+ctrl-alt-shift-9 = 'exec-and-forget ~/.config/aerospace/scripts/swap-workspace.sh 9'
+
+# --- Move window to next monitor (cycle) ---
+ctrl-alt-s = 'move-node-to-monitor --wrap-around --focus-follows-window next'
+
+# --- Pair-merge focused window with its (1,2)/(3,4)/... partner into perpendicular split.
+# When already nested → flattens back to root. Script: toggle-orientation.sh
+ctrl-alt-cmd-space = 'exec-and-forget ~/.config/aerospace/scripts/toggle-orientation.sh'
+# alt-backtick = 'exec-and-forget ~/.config/aerospace/scripts/toggle-orientation.sh'
+shift-cmd-backtick = 'focus dfs-prev --boundaries workspace --boundaries-action wrap-around-the-workspace'
+cmd-backtick = 'focus dfs-next --boundaries workspace --boundaries-action wrap-around-the-workspace'
+
+# --- Cycle window focus on current workspace (DFS-next/prev follows the layout tree
+# even into nested splits/accordions). On Danish-ISO `backtick` = the `<` key next to
+# left shift; AeroSpace's qwerty preset maps it to key code 50.
+# alt-shift-backtick = 'focus dfs-prev --boundaries workspace --boundaries-action wrap-around-the-workspace'
+
+# --- Focus back-and-forth (toggle between last two focused windows) ---
+ctrl-cmd-backtick = 'focus-back-and-forth'
+
+# --- Fullscreen toggle ---
+ctrl-alt-space = 'fullscreen'
+ctrl-alt-w = 'fullscreen'
+
+# --- Scratchpad ---
+ctrl-s = 'exec-and-forget ~/.config/aerospace/scripts/scratchpad-toggle.sh'
+ctrl-alt-shift-s = 'exec-and-forget ~/.config/aerospace/scripts/scratchpad-move.sh'
+
+# --- Close window ---
+ctrl-alt-shift-w = 'close'
+
+# --- Misc ---
+ctrl-alt-m = 'flatten-workspace-tree' # ⌥Ctrl+m
+
+# --- Workspace overview (Mission Control–style, fork-only command) ---
+# Requires AeroSpace-Debug fork build. Production AeroSpace rejects this command.
+alt-tab = 'overview'
+
+# --- Reload config ---
+ctrl-alt-shift-minus = 'reload-config'
+
+# --- Enter service mode ---
+ctrl-alt-shift-semicolon = 'mode service' # ⌥Ctrl⇧+;
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# LAUNCH APPS (your app-launching keybindings, e.g. replacing Spotlight or Alfred)
+# ═══════════════════════════════════════════════════════════════════════════════
+# --- Launch apps ---
+ctrl-alt-enter = 'exec-and-forget open -na kitty'
+ctrl-alt-shift-enter = 'exec-and-forget open -a kitty'
+ctrl-alt-shift-b = 'exec-and-forget open -a "Google Chrome"'
+ctrl-alt-shift-c = 'exec-and-forget open -a Slack'
+ctrl-alt-shift-d = 'exec-and-forget open -a Figma'
+ctrl-alt-shift-f = 'exec-and-forget open -a Finder'
+ctrl-alt-shift-k = 'exec-and-forget open -b com.google.Chrome.app.kjbdgfilnfhdoflbpgamdcdgpehopbep'
+ctrl-alt-shift-l = 'exec-and-forget open -a Linear'
+ctrl-alt-shift-m = 'exec-and-forget open -a Spotify'
+ctrl-alt-shift-x = 'exec-and-forget open -a "Visual Studio Code"'
+ctrl-alt-shift-z = 'exec-and-forget open -a "Google Chrome"'
+ctrl-alt-shift-esc = 'exec-and-forget open -a "Activity Monitor"'
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SERVICE MODE (single-key commands after entering via ⌥Ctrl⇧+;)
+# ═══════════════════════════════════════════════════════════════════════════════
+[mode.service.binding]
+esc = ['reload-config', 'mode main']
+r = ['flatten-workspace-tree', 'mode main']                # reset layout
+f = ['layout floating tiling', 'mode main']                # toggle float
+backspace = ['close-all-windows-but-current', 'mode main']
+
+alt-shift-h = ['join-with left', 'mode main']
+alt-shift-j = ['join-with down', 'mode main']
+alt-shift-k = ['join-with up', 'mode main']
+alt-shift-l = ['join-with right', 'mode main']
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# FLOATING WINDOW RULES (your float-small-windows + blacklist)
+# ═══════════════════════════════════════════════════════════════════════════════
+[[on-window-detected]]
+if.app-name-regex-substring = 'Activity Monitor'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'System Settings'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'System Preferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Find My'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Messages'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Photos'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'QuickTime Player'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Notes'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Voice Memos'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Stickies'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Shortcuts'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Maps'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Dictation'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Screen Time'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'System Information'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Bitwarden'
+run = 'layout floating'
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# APP → WORKSPACE ASSIGNMENT (auto-move apps to specific workspaces)
+# ═══════════════════════════════════════════════════════════════════════════════
+[[on-window-detected]]
+if.app-name-regex-substring = 'Slack'
+run = ['move-node-to-workspace 7', 'layout accordion']
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Linear'
+run = ['move-node-to-workspace 8', 'layout accordion']
+
+# Google Calendar
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome.app.kjbdgfilnfhdoflbpgamdcdgpehopbep'
+run = ['move-node-to-workspace 8', 'layout accordion']
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Figma'
+run = ['move-node-to-workspace 8', 'layout accordion']
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Spotify'
+run = ['move-node-to-workspace 9', 'layout accordion']
+
+
+# Auto tall layout: 3rd+ window joins the right stack automatically
+[[on-window-detected]]
+check-further-callbacks = true
+run = 'exec-and-forget /Users/mthines/.local/bin/aerospace-tall-layout.sh'
