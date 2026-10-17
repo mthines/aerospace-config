@@ -44,6 +44,6 @@ aerospace reload-config
 
 ## Notes
 
-- The `[overview]` block and `alt-tab = 'overview'` binding require the [AeroSpace-Debug fork](https://github.com/nikitabobko/AeroSpace) build that exposes the workspace overview command. Remove both if you're on upstream AeroSpace.
+- The `[overview]` block and the `alt-tab = 'overview'` / `alt-shift-tab = 'overview --windows'` bindings require the [AeroSpace-Debug fork](https://github.com/nikitabobko/AeroSpace) build that exposes the workspace overview command. Remove them if you're on upstream AeroSpace.
 - Workspace assignments and floating-window rules near the bottom of `aerospace.toml` are personal — adjust to taste.
 - Modifier conventions: `ctrl-alt` = main, `alt` = focus, `alt-cmd` = resize, `ctrl-alt-shift` = service-mode entry.

@@ -202,6 +202,9 @@ ctrl-alt-m = 'flatten-workspace-tree' # ⌥Ctrl+m
 # --- Workspace overview (Mission Control–style, fork-only command) ---
 # Requires AeroSpace-Debug fork build. Production AeroSpace rejects this command.
 alt-tab = 'overview'
+# Same grid, but for the windows of the focused workspace only (one cell per window).
+# Arrows/hjkl + Enter to pick, Esc to cancel. Needs a fork build with `overview --windows`.
+alt-shift-tab = 'overview --windows'
 
 # --- Reload config ---
 ctrl-alt-shift-minus = 'reload-config'
